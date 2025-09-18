@@ -6,8 +6,11 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.57.1" apply false
 
     // Kotlin
-    kotlin("android") version "2.2.0" apply false
+    alias(libs.plugins.kotlin.android) apply false
 
     // Kotlin Symbol Processing
     id("com.google.devtools.ksp") version "2.2.20-2.0.3" apply false
+
+    // Jetpack Compose
+    alias(libs.plugins.kotlin.compose) apply false
 }
