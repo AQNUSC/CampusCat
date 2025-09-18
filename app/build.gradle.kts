@@ -1,5 +1,14 @@
 plugins {
     alias(libs.plugins.android.application)
+
+    // Hilt
+    id("com.google.dagger.hilt.android")
+
+    // Kotlin
+    id("org.jetbrains.kotlin.android")
+
+    // Kotlin Symbol Processing
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -33,9 +42,14 @@ android {
 
 dependencies {
 
+    // Android Core
     implementation(libs.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 }
