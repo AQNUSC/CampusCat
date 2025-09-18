@@ -50,14 +50,26 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: ${{ github.event.head_commit.message }}
-          branch: dev
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          commit-message: |
+            Auto PR for dev -> master
+            Commits:
+            ${{ join(github.event.commits.*.id, '\n') }}
+          branch: auto-pr/dev-${{ github.run_number }}
           base: master
-          title: "Auto PR: ${{ github.event.head_commit.message }}"
+          title: "Auto PR: Dev branch update"
           body: |
             This pull request was automatically created after a successful CI build on `dev`.
-            Original commit: `${{ github.event.head_commit.id }}`
+            
+            ## Included Commits
+            ${{ join(github.event.commits.*.id, '\n') }}
+            
+            ## Commit Messages
+            ${{ join(github.event.commits.*.message, '\n') }}
+            
+            Triggered by workflow: `${{ github.workflow }}`
+            Run: `${{ github.run_id }}`
             Author: `${{ github.event.head_commit.author.name }}`
           draft: false
-          delete-branch: false
+          delete-branch: true
+          push-to-fork: false
