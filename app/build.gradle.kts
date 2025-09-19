@@ -90,4 +90,10 @@ dependencies {
     implementation(libs.material.icons.core)
     implementation(libs.material.icons.extended)
 
+    // RxJava3
+    implementation(libs.rxjava3)
+    implementation(libs.rxjava3.android)
+
+    // Lombok
+    implementation(libs.lombok)
 }
