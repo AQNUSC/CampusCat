@@ -85,4 +85,9 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+
+    // md3 icon
+    implementation(libs.material.icons.core)
+    implementation(libs.material.icons.extended)
+
 }
