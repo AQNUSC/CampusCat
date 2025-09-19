@@ -40,9 +40,12 @@ android {
         }
     }
 
-    // Jetpack Compose 支持
     buildFeatures {
+        // Jetpack Compose 支持
         compose = true
+
+        // BuildConfig
+        buildConfig = true
     }
 
     composeOptions {
@@ -96,4 +99,7 @@ dependencies {
 
     // Lombok
     implementation(libs.lombok)
+
+    // Timber
+    implementation(libs.timber)
 }
