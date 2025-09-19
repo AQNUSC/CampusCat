@@ -131,7 +131,7 @@ public class TaskManager {
      */
     private void interruptAndRun(Task<?> task) {
         // 取消当前任务
-        if (currentTaskDisposable != null && currentTaskDisposable.isDisposed()) {
+        if (currentTaskDisposable != null && !currentTaskDisposable.isDisposed()) {
             currentTaskDisposable.dispose();
 
             // 当前任务重入队

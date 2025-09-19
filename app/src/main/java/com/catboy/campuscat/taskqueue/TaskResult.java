@@ -1,5 +1,7 @@
 package com.catboy.campuscat.taskqueue;
 
+import androidx.annotation.NonNull;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -97,12 +99,13 @@ public class TaskResult<T> {
         return new TaskResult<T>(Status.FAILURE, message, data, error);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "TaskResult: \n"
                 + "Status: " + status + "\n"
                 + "Message: " + message + "\n"
                 + "Data: " + data + "\n"
-                + "Error: " + error.getMessage();
+                + "Error: " + (error != null ? error.getMessage() : "null");
     }
 }
