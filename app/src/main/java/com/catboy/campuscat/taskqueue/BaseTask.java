@@ -48,7 +48,7 @@ public abstract class BaseTask<T> implements Task<T> {
 
     protected BaseTask(String taskId, TaskPriority priority, boolean highPriority) {
         this.taskId = taskId;
-        this.priority = highPriority ? TaskPriority.HIGH : DEFAULT_TASK_PRIORITY;
+        this.priority = highPriority ? TaskPriority.HIGH : priority;
         this.highPriority = highPriority;
         this.maxRetryCount = DEFAULT_RETRY_COUNT;
     }
