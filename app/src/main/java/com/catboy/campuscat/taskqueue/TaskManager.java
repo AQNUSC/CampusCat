@@ -107,14 +107,8 @@ public class TaskManager {
         // 开始执行任务
         this.currentTaskDisposable = task.execute()
                 .retryWhen(errors ->
-                        errors.zipWith(Observable.range(1, task.getMaxRetryCount() + 1),
-                                        (error, retryCount) -> {
-                                            if (retryCount > task.getMaxRetryCount()) {
-                                                throw Exceptions.propagate(error);
-                                            }
-
-                                            return retryCount;
-                                        })
+                        errors.zipWith(Observable.range(1, task.getMaxRetryCount()),
+                                        (error, retryCount) -> retryCount)
                                 .flatMap(retryCount ->
                                         Observable.timer((long) Math.pow(2, retryCount),
                                                 java.util.concurrent.TimeUnit.SECONDS)))
