@@ -54,4 +54,11 @@ public interface Task<T> {
      * @return 任务结果的 LiveData
      */
     LiveData<TaskResult<T>> getLivedata();
+
+    /**
+     * 设置任务结果到 LiveData
+     *
+     * @param result 任务执行结果
+     */
+    void setLiveData(TaskResult<T> result);
 }

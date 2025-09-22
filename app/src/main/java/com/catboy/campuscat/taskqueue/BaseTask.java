@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * BaseTask
@@ -77,13 +76,7 @@ public abstract class BaseTask<T> implements Task<T> {
         return priority;
     }
 
-    /**
-     * 设置 LiveData 的值
-     * <p>
-     *     用于更新任务执行结果的状态。
-     * </p>
-     * @param result 任务执行结果
-     */
+    @Override
     public void setLiveData(TaskResult<T> result) {
         _liveData.postValue(result);
     }
