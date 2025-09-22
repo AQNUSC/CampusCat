@@ -16,14 +16,12 @@ public abstract class BaseTask<T> implements Task<T> {
 
     @Getter
     private final String taskId;
-    @Getter
     private final TaskManager.Priority priority;
     @Getter
     private final boolean highPriority;
     @Getter
     private final int maxRetryCount;
     private final MutableLiveData<TaskResult<T>> _liveData = new MutableLiveData<>();
-    @Getter
     private final LiveData<TaskResult<T>> liveData = _liveData;
 
     // 默认参数
@@ -66,5 +64,15 @@ public abstract class BaseTask<T> implements Task<T> {
         this.priority = priority;
         this.highPriority = highPriority;
         this.maxRetryCount = maxRetryCount;
+    }
+
+    @Override
+    public LiveData<TaskResult<T>> getLivedata() {
+        return liveData;
+    }
+
+    @Override
+    public TaskManager.Priority getTaskPriority() {
+        return priority;
     }
 }
