@@ -46,9 +46,10 @@ public abstract class BaseTask<T> implements Task<T> {
         this.maxRetryCount = DEFAULT_RETRY_COUNT;
     }
 
-    protected BaseTask(String taskId, TaskManager.Priority priority, boolean highPriority) {
+    // TODO: 这里的 priority 参数点多余
+    protected BaseTask(String taskId, boolean highPriority) {
         this.taskId = taskId;
-        this.priority = highPriority ? TaskManager.Priority.HIGH : priority;
+        this.priority = TaskManager.Priority.HIGH;
         this.highPriority = highPriority;
         this.maxRetryCount = DEFAULT_RETRY_COUNT;
     }
