@@ -14,5 +14,6 @@ public enum LoginErrorCode {
     NOREGISTER,
 
     /** 自定义错误码 */
-    UNKNOWN
+    UNKNOWN,
+    NONE // 无错误
 }
