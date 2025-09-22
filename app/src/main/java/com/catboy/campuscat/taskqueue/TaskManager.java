@@ -25,12 +25,39 @@ import timber.log.Timber;
  *     用于管理和调度任务的执行，支持任务优先级、中断和重试机制。
  * </p>
  */
-@Singleton
 public class TaskManager {
     private Disposable currentTaskDisposable;
     private Task<?> currentTask;
-    private final LiveData<LiveData<?>> currentTaskLiveData = new MutableLiveData<>();
+    private final MutableLiveData<LiveData<?>> currentTaskLiveData = new MutableLiveData<>();
     private final MediatorLiveData<TaskResult<?>> taskLogMediatorLiveData = new MediatorLiveData<>();
+
+    // 单例模式
+    // 不使用 Hilt 管理单例，为多平台打下基础
+    private static TaskManager instance;
+
+    /**
+     * 获取任务管理器单例实例
+     *
+     * @return 任务管理器实例
+     */
+    public static synchronized TaskManager getInstance() {
+        if (instance == null) {
+            instance = new TaskManager();
+        }
+        return instance;
+    }
+
+    /**
+     * 初始化任务管理器
+     * <p>
+     *     该方法在应用启动时调用，确保单例实例被创建。
+     * </p>
+     */
+    public static synchronized void initialize() {
+        if (instance == null) {
+            instance = new TaskManager();
+        }
+    }
 
     /**
      * 任务队列
@@ -47,8 +74,7 @@ public class TaskManager {
     /**
      * 私有构造函数
      */
-    @Inject
-    public TaskManager() {
+    private TaskManager() {
         if (BuildConfig.DEBUG) {
             Timber.d("Build version is DEBUG! Start logging current task state.");
             logCurrentTaskState();
@@ -60,9 +86,10 @@ public class TaskManager {
      *
      * @param task 任务
      */
-    private void run(Task<?> task) {
+    private synchronized void run(Task<?> task) {
         // 保存当前任务
         this.currentTask = task;
+        currentTaskLiveData.postValue(task.getLivedata());
 
         // Debug 信息
         Timber.d("Start %s, waiting task: %d", task.getTaskId(), taskQueue.size());
@@ -96,7 +123,7 @@ public class TaskManager {
      *     如果任务队列中有任务，则取出并执行；否则将当前任务置为空。
      * </p>
      */
-    private void maybeRunNext() {
+    private synchronized void maybeRunNext() {
         Task<?> nextTask = taskQueue.poll();
 
         if (nextTask != null) {
@@ -120,7 +147,11 @@ public class TaskManager {
             interruptAndRun(task);
         } else {
             taskQueue.add(task);
-            maybeRunNext();
+
+            // 当前无任务时尝试执行下一个任务
+            if (currentTask == null) {
+                maybeRunNext();
+            }
         }
     }
 
@@ -129,7 +160,7 @@ public class TaskManager {
      *
      * @param task 高优先级任务
      */
-    private void interruptAndRun(Task<?> task) {
+    private synchronized void interruptAndRun(Task<?> task) {
         // 取消当前任务
         if (currentTaskDisposable != null && !currentTaskDisposable.isDisposed()) {
             currentTaskDisposable.dispose();
@@ -155,7 +186,7 @@ public class TaskManager {
                 Timber.d("Current Task ID: %s", currentTask.getTaskId());
                 Timber.d("Task Priority: %s", currentTask.getTaskPriority());
 
-                //
+                // 移除旧的监听
                 taskLogMediatorLiveData.addSource(currentTask.getLivedata(),
                         taskLogMediatorLiveData::postValue);
             } else {
