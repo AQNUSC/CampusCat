@@ -96,4 +96,13 @@ dependencies {
 
     // Timber
     implementation(libs.timber)
+
+    // Retrofit & Gson
+    implementation(libs.gson)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.adapter.rxjava3)
+
+    // OkHttp
+    implementation(libs.okhttp)
 }
