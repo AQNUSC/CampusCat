@@ -91,6 +91,14 @@ public class TaskResult<T> {
         return new TaskResult<T>(Status.SUCCESS, null, data, null);
     }
 
+    public static <T> TaskResult<T> failure(Throwable error) {
+        return new TaskResult<T>(Status.FAILURE, null, null, error);
+    }
+
+    public static <T> TaskResult<T> failure(T data, Throwable error) {
+        return new TaskResult<T>(Status.FAILURE, null, data, error);
+    }
+
     public static <T> TaskResult<T> failure(String message, Throwable error) {
         return new TaskResult<T>(Status.FAILURE, message, null, error);
     }
