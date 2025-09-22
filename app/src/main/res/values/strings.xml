@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CampusCat</string>
+    <string name="login_error_no_user">User name does not exist, please check if the user name is correct.</string>
+    <string name="login_error_password_incorrect_max">The account has been locked. Please try again later.</string>
+    <string name="login_error_password_incorrect">Incorrect password. You have entered the wrong password %s times in a row, and your account will be locked when the number of errors reaches %s. Please check your password and try again!</string>
+    <string name="login_error_user_locked">The account has been locked. Unlock time: %s. Please try again later.</string>
+    <string name="login_error_no_register">The service is not registered, please contact the developer!</string>
+    <string name="login_error_unknown">Unknown login error!</string>
 </resources>
