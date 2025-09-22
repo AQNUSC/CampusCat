@@ -99,6 +99,9 @@ public class TaskManager {
     private synchronized void run(Task<?> task) {
         // 保存当前任务
         this.currentTask = task;
+
+        // 立即设置任务为运行状态
+        task.setLiveData(TaskResult.running());
         currentTaskLiveData.postValue(task.getLivedata());
 
         // Debug 信息
@@ -108,7 +111,11 @@ public class TaskManager {
         this.currentTaskDisposable = task.execute()
                 .retryWhen(errors ->
                         errors.zipWith(Observable.range(1, task.getMaxRetryCount()),
-                                        (error, retryCount) -> retryCount)
+                                        (error, retryCount) -> {
+                                            // 输出错误日志
+                                            Timber.e(error);
+                                            return retryCount;
+                                        })
                                 .flatMap(retryCount ->
                                         Observable.timer((long) Math.pow(2, retryCount),
                                                 java.util.concurrent.TimeUnit.SECONDS)))
