@@ -3,9 +3,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.application)
 
-    // Hilt
-    alias(libs.plugins.hilt)
-
     // Kotlin
     alias(libs.plugins.kotlin.android)
 
@@ -84,10 +81,6 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
 
     // md3 icon
     implementation(libs.material.icons.core)
