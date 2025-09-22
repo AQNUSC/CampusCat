@@ -2,6 +2,8 @@ package com.catboy.campuscat;
 
 import android.app.Application;
 
+import com.catboy.campuscat.taskqueue.TaskManager;
+
 import timber.log.Timber;
 
 /**
@@ -18,5 +20,8 @@ public class CampusCatApp extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+
+        // 初始化TaskManager单例
+        TaskManager.initialize();
     }
 }
