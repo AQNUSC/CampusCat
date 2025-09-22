@@ -46,14 +46,14 @@ public class LoginRequest {
 
     // 将 LoginRequest 对象转换为 Map 以便发送请求
     public Map<String, String> toMap() {
-        return Map.of(
-                "username", username,
-                "password", password,
-                "service", service,
-                "loginType", loginType,
-                "id", id,
-                "code", code
-        );
+        Map<String, String> map = new java.util.HashMap<>();
+        map.put("username", username);
+        map.put("password", password);
+        map.put("service", service);
+        map.put("loginType", loginType);
+        map.put("id", id);
+        map.put("code", code);
+        return map;
     }
 
     /** 静态工厂方法 **/
