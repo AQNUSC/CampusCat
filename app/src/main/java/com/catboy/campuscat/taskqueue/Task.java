@@ -25,7 +25,7 @@ public interface Task<T> {
      *
      * @return 任务优先级
      */
-    TaskPriority getTaskPriority();
+    TaskManager.Priority getTaskPriority();
 
     /**
      * 任务是否为高优先级

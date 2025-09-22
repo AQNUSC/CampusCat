@@ -17,7 +17,7 @@ public abstract class BaseTask<T> implements Task<T> {
     @Getter
     private final String taskId;
     @Getter
-    private final TaskPriority priority;
+    private final TaskManager.Priority priority;
     @Getter
     private final boolean highPriority;
     @Getter
@@ -27,7 +27,7 @@ public abstract class BaseTask<T> implements Task<T> {
     private final LiveData<TaskResult<T>> liveData = _liveData;
 
     // 默认参数
-    private static final TaskPriority DEFAULT_TASK_PRIORITY = TaskPriority.MEDIUM;
+    private static final TaskManager.Priority DEFAULT_TASK_PRIORITY = TaskManager.Priority.MEDIUM;
     private static final int DEFAULT_RETRY_COUNT = 3;
     private static final boolean DEFAULT_HIGH_PRIORITY = false;
 
@@ -39,28 +39,28 @@ public abstract class BaseTask<T> implements Task<T> {
         this.maxRetryCount = DEFAULT_RETRY_COUNT;
     }
 
-    protected BaseTask(String taskId, TaskPriority priority) {
+    protected BaseTask(String taskId, TaskManager.Priority priority) {
         this.taskId = taskId;
         this.priority = priority;
         this.highPriority = DEFAULT_HIGH_PRIORITY;
         this.maxRetryCount = DEFAULT_RETRY_COUNT;
     }
 
-    protected BaseTask(String taskId, TaskPriority priority, boolean highPriority) {
+    protected BaseTask(String taskId, TaskManager.Priority priority, boolean highPriority) {
         this.taskId = taskId;
-        this.priority = highPriority ? TaskPriority.HIGH : priority;
+        this.priority = highPriority ? TaskManager.Priority.HIGH : priority;
         this.highPriority = highPriority;
         this.maxRetryCount = DEFAULT_RETRY_COUNT;
     }
 
-    protected BaseTask(String taskId, TaskPriority priority, int maxRetryCount) {
+    protected BaseTask(String taskId, TaskManager.Priority priority, int maxRetryCount) {
         this.taskId = taskId;
         this.priority = priority;
         this.highPriority = DEFAULT_HIGH_PRIORITY;
         this.maxRetryCount = maxRetryCount;
     }
 
-    protected BaseTask(String taskId, TaskPriority priority, boolean highPriority, int maxRetryCount) {
+    protected BaseTask(String taskId, TaskManager.Priority priority, boolean highPriority, int maxRetryCount) {
         this.taskId = taskId;
         this.priority = priority;
         this.highPriority = highPriority;

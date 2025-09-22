@@ -33,6 +33,19 @@ public class TaskManager {
     private static TaskManager instance;
 
     /**
+     * 任务优先级枚举(内部类) - 高、中、低
+     * <p>
+     *     用于定义任务的优先级，优先级高的任务将
+     *     优先执行。
+     * </p>
+     */
+    public enum Priority {
+        HIGH,
+        MEDIUM,
+        LOW
+    }
+
+    /**
      * 获取任务管理器单例实例
      *
      * @return 任务管理器实例
