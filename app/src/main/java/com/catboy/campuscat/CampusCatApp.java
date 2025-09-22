@@ -8,7 +8,7 @@ import timber.log.Timber;
 
 /**
  * CampusCatApp类是应用程序的入口点，继承自Application类。
- * 使用@HiltAndroidApp注解启用Hilt依赖注入框架。
+ * 采用单例模式初始化TaskManager，无需依赖注入框架
  */
 public class CampusCatApp extends Application {
 
