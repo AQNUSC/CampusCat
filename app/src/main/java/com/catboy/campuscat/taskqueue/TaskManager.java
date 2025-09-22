@@ -9,9 +9,6 @@ import com.catboy.campuscat.BuildConfig;
 import java.util.Comparator;
 import java.util.concurrent.PriorityBlockingQueue;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;

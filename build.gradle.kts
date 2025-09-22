@@ -2,9 +2,6 @@
 plugins {
     alias(libs.plugins.android.application) apply false
 
-    // Hilt
-    alias(libs.plugins.hilt) apply false
-
     // Kotlin
     alias(libs.plugins.kotlin.android) apply false
 
