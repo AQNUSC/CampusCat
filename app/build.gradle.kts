@@ -93,7 +93,6 @@ dependencies {
     // Lombok
     implementation(libs.lombok)
     annotationProcessor(libs.lombok)
-    ksp(libs.lombok)
 
     // Timber
     implementation(libs.timber)
