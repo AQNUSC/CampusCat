@@ -151,7 +151,6 @@ public class TaskManager {
             interruptAndRun(task);
         } else {
             taskQueue.add(task);
-
             // 当前无任务时尝试执行下一个任务
             if (currentTask == null) {
                 maybeRunNext();
