@@ -66,9 +66,4 @@ public abstract class BaseTask<T> implements Task<T> {
         this.highPriority = highPriority;
         this.maxRetryCount = maxRetryCount;
     }
-
-    @Override
-    public LiveData<TaskResult<T>> getLivedata() {
-        return liveData;
-    }
 }
